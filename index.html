@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
 
@@ -39,6 +39,7 @@ body{
     z-index:999;
     display:flex;
     gap:10px;
+    flex-wrap:wrap;
 }
 
 .top-buttons button{
@@ -74,7 +75,7 @@ body{
 }
 
 /* =========================
-   LEFT
+   LEFT SIDE
 ========================= */
 
 .left{
@@ -363,7 +364,6 @@ body{
         right:auto;
         justify-content:center;
         padding:20px;
-        flex-wrap:wrap;
     }
 
 }
@@ -567,6 +567,121 @@ body{
 
         </div>
 
+        <!-- EXPERIENCE -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Pengalaman Kerja
+            </h2>
+
+            <h2 class="lang en">
+                Work Experience
+            </h2>
+
+            <div class="job">
+
+                <h3>Tooling Engineer</h3>
+                <span>PT Pratama Abadi Industri | 2016 - Present</span>
+
+                <ul class="lang id active">
+
+                    <li>Mengelola desain dan persiapan tooling.</li>
+                    <li>Membuat model CAD 2D & 3D.</li>
+                    <li>Menyiapkan drawing dan dokumentasi tooling.</li>
+                    <li>Melakukan troubleshooting tooling produksi.</li>
+
+                </ul>
+
+                <ul class="lang en">
+
+                    <li>Managed tooling design and preparation.</li>
+                    <li>Created 2D & 3D CAD models.</li>
+                    <li>Prepared technical drawings and tooling documentation.</li>
+                    <li>Performed tooling troubleshooting.</li>
+
+                </ul>
+
+            </div>
+
+            <div class="job">
+
+                <h3>Daily Mold Checker - PMIMS</h3>
+                <span>PT Pratama Abadi Industri | 2014 - 2016</span>
+
+                <ul class="lang id active">
+
+                    <li>Melakukan inspeksi mold.</li>
+                    <li>Mengelola inventaris mold.</li>
+                    <li>Berkoordinasi dengan QA dan produksi.</li>
+
+                </ul>
+
+                <ul class="lang en">
+
+                    <li>Conducted mold inspections.</li>
+                    <li>Managed mold inventory.</li>
+                    <li>Coordinated with QA and production teams.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Pendidikan
+            </h2>
+
+            <h2 class="lang en">
+                Education
+            </h2>
+
+            <p class="lang id active">
+
+                <strong>Sarjana Manajemen</strong><br>
+                STIE PGRI Sukabumi
+
+            </p>
+
+            <p class="lang en">
+
+                <strong>Bachelor Degree in Management</strong><br>
+                STIE PGRI Sukabumi
+
+            </p>
+
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Bahasa
+            </h2>
+
+            <h2 class="lang en">
+                Languages
+            </h2>
+
+            <ul class="lang id active">
+
+                <li>Indonesia — Native</li>
+                <li>Inggris — Intermediate</li>
+
+            </ul>
+
+            <ul class="lang en">
+
+                <li>Indonesian — Native</li>
+                <li>English — Intermediate</li>
+
+            </ul>
+
+        </div>
+
     </div>
 
 </div>
@@ -596,7 +711,7 @@ body{
 <script>
 
 /* =========================
-   LANGUAGE
+   LANGUAGE SWITCHER
 ========================= */
 
 function setLanguage(language){
@@ -612,7 +727,7 @@ function setLanguage(language){
 }
 
 /* =========================
-   PHOTO -> NAME
+   PHOTO TO NAME ANIMATION
 ========================= */
 
 setTimeout(()=>{
@@ -630,7 +745,7 @@ setTimeout(()=>{
 },3000);
 
 /* =========================
-   POPUP
+   PHOTO POPUP
 ========================= */
 
 function openPhotoPopup(){
