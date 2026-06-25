@@ -1,0 +1,747 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yodi Setiawan - CV</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#dfe3e8;
+    color:#333;
+    line-height:1.6;
+    padding:30px;
+}
+
+/* =========================
+   TOP BUTTONS
+========================= */
+
+.top-buttons{
+    position:fixed;
+    top:20px;
+    right:20px;
+    z-index:999;
+    display:flex;
+    gap:10px;
+}
+
+.top-buttons button{
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    background:#2563eb;
+    color:white;
+    transition:0.3s;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.top-buttons button:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   MAIN CV
+========================= */
+
+.cv-container{
+    width:210mm;
+    min-height:297mm;
+    margin:auto;
+    background:white;
+    display:grid;
+    grid-template-columns:320px 1fr;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   LEFT
+========================= */
+
+.left{
+    background:#17233b;
+    color:white;
+    padding:40px 30px;
+    text-align:center;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-wrapper{
+    margin-bottom:30px;
+}
+
+.profile-photo{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid rgba(255,255,255,0.25);
+
+    display:none;
+    opacity:0;
+    transform:scale(0.8);
+
+    transition:0.5s;
+}
+
+.active-photo{
+    display:inline-block;
+    opacity:1;
+    transform:scale(1);
+}
+
+.profile-name{
+    display:none;
+    font-size:34px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.profile-name:hover{
+    color:#93c5fd;
+}
+
+.active-name{
+    display:block;
+    animation:fadeIn 0.5s ease;
+}
+
+/* =========================
+   JOB TITLE
+========================= */
+
+.left h3{
+    color:#93c5fd;
+    font-weight:400;
+    margin-bottom:30px;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact{
+    margin-bottom:35px;
+    text-align:left;
+}
+
+.contact p{
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+    font-size:20px;
+    color:#60a5fa;
+    margin-top:30px;
+    margin-bottom:15px;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+    padding-bottom:5px;
+    text-align:left;
+}
+
+.left ul{
+    list-style:none;
+    text-align:left;
+}
+
+.left li{
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.right{
+    padding:40px;
+}
+
+.right-section{
+    margin-bottom:35px;
+}
+
+.right-section h2{
+    color:#2563eb;
+    font-size:24px;
+    margin-bottom:15px;
+    border-bottom:2px solid #dbeafe;
+    padding-bottom:5px;
+}
+
+.profile{
+    text-align:justify;
+}
+
+.job{
+    margin-bottom:25px;
+}
+
+.job h3{
+    font-size:18px;
+    color:#111827;
+}
+
+.job span{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.job ul{
+    padding-left:20px;
+    margin-top:10px;
+}
+
+.job li{
+    margin-bottom:8px;
+}
+
+.highlight{
+    color:#2563eb;
+    font-weight:600;
+}
+
+/* =========================
+   LANGUAGE
+========================= */
+
+.lang{
+    display:none;
+}
+
+.active{
+    display:block;
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.photo-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.3s;
+}
+
+.photo-popup.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.popup-image{
+    width:350px;
+    max-width:90%;
+    border-radius:16px;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+.close-popup{
+    position:absolute;
+    top:25px;
+    right:35px;
+    color:white;
+    font-size:34px;
+    cursor:pointer;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+
+    @page{
+        size:A4;
+        margin:0;
+    }
+
+    body{
+        background:white;
+        padding:0;
+    }
+
+    .top-buttons{
+        display:none;
+    }
+
+    .cv-container{
+        width:210mm;
+        min-height:297mm;
+        margin:0;
+        box-shadow:none;
+    }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    body{
+        padding:0;
+    }
+
+    .cv-container{
+        width:100%;
+        grid-template-columns:1fr;
+    }
+
+    .top-buttons{
+        position:relative;
+        top:auto;
+        right:auto;
+        justify-content:center;
+        padding:20px;
+        flex-wrap:wrap;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     BUTTONS
+========================= -->
+
+<div class="top-buttons">
+
+    <button onclick="setLanguage('id')">
+        🇮🇩 Indonesia
+    </button>
+
+    <button onclick="setLanguage('en')">
+        🇬🇧 English
+    </button>
+
+    <button onclick="window.print()">
+        🖨 Save PDF
+    </button>
+
+</div>
+
+<!-- =========================
+     MAIN CV
+========================= -->
+
+<div class="cv-container">
+
+    <!-- LEFT -->
+    <div class="left">
+
+        <!-- PROFILE -->
+        <div class="profile-wrapper">
+
+            <img
+                src="foto.jpg"
+                id="profilePhoto"
+                class="profile-photo active-photo"
+                alt="Yodi Setiawan"
+            >
+
+            <h1
+                id="profileName"
+                class="profile-name"
+                onclick="openPhotoPopup()"
+            >
+                Yodi Setiawan
+            </h1>
+
+        </div>
+
+        <!-- TITLE -->
+        <h3 class="lang id active">
+            Senior Tooling Engineer
+        </h3>
+
+        <h3 class="lang en">
+            Senior Tooling Engineer
+        </h3>
+
+        <!-- CONTACT -->
+        <div class="contact">
+
+            <p>📍 Cianjur, Jawa Barat, Indonesia</p>
+            <p>📧 yodi_kick@outlook.com</p>
+            <p>📱 +62 877-2904-4022</p>
+
+        </div>
+
+        <!-- SKILLS -->
+        <h2 class="section-title lang id active">
+            Keahlian Teknis
+        </h2>
+
+        <h2 class="section-title lang en">
+            Technical Skills
+        </h2>
+
+        <ul class="lang id active">
+
+            <li>2D Drawing Teknik</li>
+            <li>3D Modeling (Rhinoceros)</li>
+            <li>Cadkey & Dimension</li>
+            <li>3D Grading (Rhino CDL)</li>
+            <li>Midsole & Outsole Tooling</li>
+            <li>CAD Troubleshooting</li>
+
+        </ul>
+
+        <ul class="lang en">
+
+            <li>2D Technical Drawing</li>
+            <li>3D Modeling (Rhinoceros)</li>
+            <li>Cadkey & Dimension</li>
+            <li>3D Grading (Rhino CDL)</li>
+            <li>Midsole & Outsole Tooling</li>
+            <li>CAD Troubleshooting</li>
+
+        </ul>
+
+        <!-- COMPETENCIES -->
+        <h2 class="section-title lang id active">
+            Kompetensi
+        </h2>
+
+        <h2 class="section-title lang en">
+            Competencies
+        </h2>
+
+        <ul class="lang id active">
+
+            <li>Kepemimpinan</li>
+            <li>Problem Solving</li>
+            <li>Komunikasi</li>
+            <li>Kerja Sama Tim</li>
+
+        </ul>
+
+        <ul class="lang en">
+
+            <li>Leadership</li>
+            <li>Problem Solving</li>
+            <li>Communication</li>
+            <li>Team Collaboration</li>
+
+        </ul>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+        <!-- PROFILE -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Profil Profesional
+            </h2>
+
+            <h2 class="lang en">
+                Professional Profile
+            </h2>
+
+            <p class="profile lang id active">
+
+                Profesional Tooling Engineer dengan pengalaman lebih dari
+                <span class="highlight">10 tahun</span>
+                di industri manufaktur alas kaki.
+                Berpengalaman dalam pengembangan tooling,
+                CAD 2D & 3D,
+                pengecekan mold,
+                troubleshooting produksi,
+                dan koordinasi vendor internasional.
+
+            </p>
+
+            <p class="profile lang en">
+
+                Experienced Tooling Engineer with more than
+                <span class="highlight">10 years of expertise</span>
+                in footwear manufacturing industry.
+                Skilled in tooling development,
+                CAD 2D & 3D,
+                mold checking,
+                production troubleshooting,
+                and collaboration with international vendors.
+
+            </p>
+
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Pengalaman Kerja
+            </h2>
+
+            <h2 class="lang en">
+                Work Experience
+            </h2>
+
+            <div class="job">
+
+                <h3>Tooling Engineer</h3>
+                <span>PT Pratama Abadi Industri | 2016 - Present</span>
+
+                <ul class="lang id active">
+
+                    <li>Mengelola desain dan persiapan tooling.</li>
+                    <li>Membuat model CAD 2D & 3D.</li>
+                    <li>Menyiapkan drawing dan dokumentasi tooling.</li>
+                    <li>Melakukan troubleshooting tooling produksi.</li>
+
+                </ul>
+
+                <ul class="lang en">
+
+                    <li>Managed tooling design and preparation.</li>
+                    <li>Created 2D & 3D CAD models.</li>
+                    <li>Prepared technical drawings and tooling documentation.</li>
+                    <li>Performed tooling troubleshooting.</li>
+
+                </ul>
+
+            </div>
+
+            <div class="job">
+
+                <h3>Daily Mold Checker - PMIMS</h3>
+                <span>PT Pratama Abadi Industri | 2014 - 2016</span>
+
+                <ul class="lang id active">
+
+                    <li>Melakukan inspeksi mold.</li>
+                    <li>Mengelola inventaris mold.</li>
+                    <li>Berkoordinasi dengan QA dan produksi.</li>
+
+                </ul>
+
+                <ul class="lang en">
+
+                    <li>Conducted mold inspections.</li>
+                    <li>Managed mold inventory.</li>
+                    <li>Coordinated with QA and production teams.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Pendidikan
+            </h2>
+
+            <h2 class="lang en">
+                Education
+            </h2>
+
+            <p class="lang id active">
+
+                <strong>Sarjana Manajemen</strong><br>
+                STIE PGRI Sukabumi
+
+            </p>
+
+            <p class="lang en">
+
+                <strong>Bachelor Degree in Management</strong><br>
+                STIE PGRI Sukabumi
+
+            </p>
+
+        </div>
+
+        <!-- LANGUAGES -->
+        <div class="right-section">
+
+            <h2 class="lang id active">
+                Bahasa
+            </h2>
+
+            <h2 class="lang en">
+                Languages
+            </h2>
+
+            <ul class="lang id active">
+
+                <li>Indonesia — Native</li>
+                <li>Inggris — Intermediate</li>
+
+            </ul>
+
+            <ul class="lang en">
+
+                <li>Indonesian — Native</li>
+                <li>English — Intermediate</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     POPUP
+========================= -->
+
+<div id="photoPopup" class="photo-popup">
+
+    <span class="close-popup" onclick="closePhotoPopup()">
+        ✕
+    </span>
+
+    <img
+        src="foto.jpg"
+        class="popup-image"
+        alt="Yodi Setiawan"
+    >
+
+</div>
+
+<!-- =========================
+     SCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   LANGUAGE
+========================= */
+
+function setLanguage(language){
+
+    document.querySelectorAll('.lang').forEach(el=>{
+        el.classList.remove('active');
+    });
+
+    document.querySelectorAll('.' + language).forEach(el=>{
+        el.classList.add('active');
+    });
+
+}
+
+/* =========================
+   PHOTO -> NAME
+========================= */
+
+setTimeout(()=>{
+
+    document
+        .getElementById('profilePhoto')
+        .classList
+        .remove('active-photo');
+
+    document
+        .getElementById('profileName')
+        .classList
+        .add('active-name');
+
+},3000);
+
+/* =========================
+   POPUP
+========================= */
+
+function openPhotoPopup(){
+
+    document
+        .getElementById('photoPopup')
+        .classList
+        .add('show');
+
+}
+
+function closePhotoPopup(){
+
+    document
+        .getElementById('photoPopup')
+        .classList
+        .remove('show');
+
+}
+
+document
+.getElementById('photoPopup')
+.addEventListener('click',function(e){
+
+    if(e.target.id === 'photoPopup'){
+        closePhotoPopup();
+    }
+
+});
+
+</script>
+
+</body>
+</html>
+```
+
