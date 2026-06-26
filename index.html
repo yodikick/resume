@@ -2,844 +2,1382 @@
 <html lang="en">
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Yodi Setiawan - CV</title>
-
-<style>
-
-/* =========================
-   RESET
-========================= */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:'Segoe UI',sans-serif;
-    background:#dfe3e8;
-    color:#333;
-    line-height:1.6;
-    padding:30px;
-}
-
-/* =========================
-   TOP BUTTONS
-========================= */
-
-.top-buttons{
-    position:fixed;
-    top:20px;
-    right:20px;
-    z-index:999;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.top-buttons button{
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
-    background:#2563eb;
-    color:white;
-    transition:0.3s;
-    box-shadow:0 4px 10px rgba(0,0,0,0.15);
-}
-
-.top-buttons button:hover{
-    background:#1d4ed8;
-    transform:translateY(-2px);
-}
-
-/* =========================
-   MAIN CV
-========================= */
-
-.cv-container{
-    width:210mm;
-    min-height:297mm;
-    margin:auto;
-    background:white;
-    display:grid;
-    grid-template-columns:320px 1fr;
-    overflow:hidden;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
-}
-
-/* =========================
-   LEFT SIDE
-========================= */
-
-.left{
-    background:#17233b;
-    color:white;
-    padding:40px 30px;
-    text-align:center;
-}
-
-/* =========================
-   PROFILE
-========================= */
-
-.profile-wrapper{
-    margin-bottom:30px;
-    position:relative;
-}
-
-.profile-photo{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    object-fit:cover;
-    border:5px solid rgba(255,255,255,0.25);
-
-    display:none;
-    opacity:0;
-    transform:scale(0.8);
-
-    transition:0.5s;
-}
-
-.active-photo{
-    display:inline-block;
-    opacity:1;
-    transform:scale(1);
-}
-
-.profile-name{
-    display:none;
-    font-size:34px;
-    font-weight:700;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.profile-name:hover{
-    color:#93c5fd;
-}
-
-.active-name{
-    display:block;
-    animation:fadeIn 0.5s ease;
-}
-
-/* =========================
-   JOB TITLE
-========================= */
-
-.left h3{
-    color:#93c5fd;
-    font-weight:400;
-    margin-bottom:30px;
-}
-
-/* =========================
-   CONTACT
-========================= */
-
-.contact{
-    margin-bottom:35px;
-    text-align:left;
-}
-
-.contact p{
-    margin-bottom:12px;
-    font-size:14px;
-}
-
-.contact a{
-    color:#93c5fd;
-    text-decoration:none;
-    transition:0.3s;
-    word-break:break-word;
-}
-
-.contact a:hover{
-    color:white;
-    text-decoration:underline;
-}
-
-/* =========================
-   SECTION TITLE
-========================= */
-
-.section-title{
-    font-size:20px;
-    color:#60a5fa;
-    margin-top:30px;
-    margin-bottom:15px;
-    border-bottom:1px solid rgba(255,255,255,0.2);
-    padding-bottom:5px;
-    text-align:left;
-}
-
-.left ul{
-    list-style:none;
-    text-align:left;
-}
-
-.left li{
-    margin-bottom:10px;
-    font-size:14px;
-}
-
-/* =========================
-   RIGHT SIDE
-========================= */
-
-.right{
-    padding:40px;
-}
-
-.right-section{
-    margin-bottom:35px;
-}
-
-.right-section h2{
-    color:#2563eb;
-    font-size:24px;
-    margin-bottom:15px;
-    border-bottom:2px solid #dbeafe;
-    padding-bottom:5px;
-}
-
-.profile{
-    text-align:justify;
-}
-
-.job{
-    margin-bottom:25px;
-}
-
-.job h3{
-    font-size:18px;
-    color:#111827;
-}
-
-.job span{
-    color:#6b7280;
-    font-size:14px;
-}
-
-.job ul{
-    padding-left:20px;
-    margin-top:10px;
-}
-
-.job li{
-    margin-bottom:8px;
-}
-
-.highlight{
-    color:#2563eb;
-    font-weight:600;
-}
-
-/* =========================
-   LANGUAGE
-========================= */
-
-.lang{
-    display:none;
-}
-
-.active{
-    display:block;
-}
-
-/* =========================
-   POPUP - MODIFIED
-========================= */
-
-.photo-popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.7);
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    z-index:9999;
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:0.3s;
-}
-
-.photo-popup.show{
-    opacity:1;
-    visibility:visible;
-}
-
-/* Popup container yang menempel di bawah nama */
-.popup-container{
-    position:relative;
-    width:auto;
-    max-width:250px; /* Lebar disesuaikan dengan nama */
-    background:white;
-    border-radius:12px;
-    padding:20px 20px 15px 20px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.5);
-    text-align:center;
-}
-
-.popup-image{
-    width:100%;
-    max-width:200px;
-    height:auto;
-    border-radius:12px;
-    display:block;
-    margin:0 auto;
-}
-
-.popup-name{
-    color:#17233b;
-    font-size:20px;
-    font-weight:700;
-    margin-top:12px;
-    margin-bottom:4px;
-}
-
-.popup-title{
-    color:#6b7280;
-    font-size:14px;
-}
-
-.close-popup{
-    position:absolute;
-    top:8px;
-    right:15px;
-    color:#6b7280;
-    font-size:28px;
-    cursor:pointer;
-    font-weight:300;
-    transition:0.3s;
-    line-height:1;
-}
-
-.close-popup:hover{
-    color:#17233b;
-    transform:scale(1.1);
-}
-
-/* =========================
-   ANIMATION
-========================= */
-
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-/* =========================
-   PRINT
-========================= */
-
-@media print{
-
-    @page{
-        size:A4;
-        margin:0;
-    }
-
-    body{
-        background:white;
-        padding:0;
-    }
-
-    .top-buttons{
-        display:none;
-    }
-
-    .cv-container{
-        width:210mm;
-        min-height:297mm;
-        margin:0;
-        box-shadow:none;
-    }
-
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-
-    body{
-        padding:0;
-    }
-
-    .cv-container{
-        width:100%;
-        grid-template-columns:1fr;
-    }
-
-    .top-buttons{
-        position:relative;
-        top:auto;
-        right:auto;
-        justify-content:center;
-        padding:20px;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Yodi Setiawan - Tooling Engineer | Portfolio & CV</title>
+    <meta name="description" content="Yodi Setiawan - Tooling Engineer with 10+ years of experience in footwear manufacturing. Specialized in CAD 2D & 3D, mold checking, and tooling development.">
+    <meta name="keywords" content="Tooling Engineer, CAD, Rhinoceros, Footwear Manufacturing, Mold Checking, Indonesia">
+    <meta name="author" content="Yodi Setiawan">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Yodi Setiawan - Tooling Engineer">
+    <meta property="og:description" content="Professional Tooling Engineer with 10+ years of experience in footwear manufacturing.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="foto.webp">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===============================
+               RESET & BASE
+        =============================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===============================
+               BUTTONS
+        =============================== */
+        .btn-primary {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: #2563eb;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 2px solid #2563eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 8px 20px;
+            font-size: 13px;
+        }
+
+        /* ===============================
+               NAVIGATION
+        =============================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 14px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .nav-logo span {
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links .btn-primary {
+            padding: 8px 24px;
+            font-size: 13px;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #1e293b;
+        }
+
+        /* ===============================
+               HERO / TENTANG SAYA
+        =============================== */
+        .hero {
+            padding: 140px 0 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            color: #0f172a;
+        }
+
+        .hero-content h1 span {
+            color: #2563eb;
+        }
+
+        .hero-tagline {
+            font-size: 20px;
+            font-weight: 400;
+            color: #2563eb;
+            margin-bottom: 16px;
+        }
+
+        .hero-description {
+            font-size: 16px;
+            color: #475569;
+            max-width: 500px;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-social {
+            margin-top: 28px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1e293b;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-social a:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* ===============================
+               SECTION TITLE
+        =============================== */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: #64748b;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        .section-title-center {
+            text-align: center;
+        }
+
+        .section-title-center .section-subtitle {
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===============================
+               EXPERIENCE / PENGALAMAN
+        =============================== */
+        .experience-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .experience-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid #2563eb;
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateX(6px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-card .header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .experience-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .experience-card .company {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .experience-card .period {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .experience-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 12px;
+        }
+
+        .experience-card ul li {
+            padding: 4px 0;
+            padding-left: 24px;
+            position: relative;
+            color: #475569;
+            font-size: 15px;
+        }
+
+        .experience-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* ===============================
+               SKILLS / KEHLIAN
+        =============================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 24px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            border-color: #2563eb;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+        }
+
+        .skill-item .icon {
+            font-size: 32px;
+            color: #2563eb;
+            margin-bottom: 8px;
+        }
+
+        .skill-item .name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        /* Skill Categories */
+        .skill-category {
+            margin-bottom: 32px;
+        }
+
+        .skill-category h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        /* ===============================
+               PORTFOLIO
+        =============================== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+
+        .portfolio-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .portfolio-card .image {
+            height: 200px;
+            background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #2563eb;
+        }
+
+        .portfolio-card .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-card .info {
+            padding: 24px;
+        }
+
+        .portfolio-card .info h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+
+        .portfolio-card .info p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .portfolio-card .info .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .portfolio-card .info .tags span {
+            background: #eef2ff;
+            color: #2563eb;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .portfolio-card .info .links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .portfolio-card .info .links a {
+            color: #2563eb;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .portfolio-card .info .links a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* ===============================
+               CONTACT / KONTAK
+        =============================== */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            background: white;
+            border-radius: 20px;
+            padding: 48px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .contact-info p {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-item .icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #eef2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .contact-item .label {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .contact-item .value {
+            font-weight: 500;
+            color: #0f172a;
+        }
+
+        .contact-item a {
+            color: #2563eb;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* ===============================
+               CONTACT SIDEBAR - No Form
+        =============================== */
+        .contact-sidebar {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-sidebar .big-icon {
+            font-size: 64px;
+            color: #2563eb;
+            margin-bottom: 16px;
+        }
+
+        .contact-sidebar h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .contact-sidebar p {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .contact-sidebar .availability {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-sidebar .availability .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .contact-sidebar .availability span {
+            font-weight: 500;
+            font-size: 14px;
+            color: #0f172a;
+        }
+
+        .contact-sidebar .availability small {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+        /* ===============================
+               FOOTER
+        =============================== */
+        .footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer .social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .footer .social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .footer .social a:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            font-size: 14px;
+        }
+
+        .footer .heart {
+            color: #ef4444;
+        }
+
+        /* ===============================
+               RESPONSIVE
+        =============================== */
+        @media (max-width: 992px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-social {
+                justify-content: center;
+            }
+
+            .hero-image img {
+                width: 260px;
+                height: 260px;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                padding: 32px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 24px;
+                gap: 16px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 0 60px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .hero-tagline {
+                font-size: 17px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .experience-card .header {
+                flex-direction: column;
+            }
+
+            .contact-wrapper {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .skill-item {
+                padding: 16px;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+        }
+    </style>
 
 </head>
 
 <body>
 
-<!-- =========================
-     BUTTONS
-========================= -->
-
-<div class="top-buttons">
-
-    <button onclick="setLanguage('id')">
-        🇮🇩 Indonesia
-    </button>
-
-    <button onclick="setLanguage('en')">
-        🇬🇧 English
-    </button>
-
-    <button onclick="window.print()">
-        🖨 Save PDF
-    </button>
-
-</div>
-
-<!-- =========================
-     MAIN CV
-========================= -->
-
-<div class="cv-container">
-
-    <!-- LEFT -->
-    <div class="left">
-
-        <!-- PROFILE -->
-        <div class="profile-wrapper">
-
-            <img
-                src="foto.webp"
-                id="profilePhoto"
-                class="profile-photo active-photo"
-                alt="Yodi Setiawan"
-            >
-
-            <h1
-                id="profileName"
-                class="profile-name"
-                onclick="openPhotoPopup()"
-            >
-                Yodi Setiawan
-            </h1>
-
-        </div>
-
-        <!-- TITLE -->
-        <h3 class="lang id">
-            Tooling Engineer
-        </h3>
-
-        <h3 class="lang en active">
-            Tooling Engineer
-        </h3>
-
-        <!-- CONTACT -->
-        <div class="contact">
-
-            <p>
-                📍 Cianjur, Jawa Barat, Indonesia
-            </p>
-
-            <p>
-                📧 
-                <a href="mailto:mail@yodikick.my.id">
-                    mail@yodikick.my.id
-                </a>
-            </p>
-
-            <p>
-                📧 
-                <a href="mailto:yodi_kick@outlook.com">
-                    yodi_kick@outlook.com
-                </a>
-            </p>
-           
-            <p>
-                📱 
-                <a 
-                    href="https://wa.me/6287729044022"
-                    target="_blank"
-                >
-                    +62 877-2904-4022
-                </a>
-            </p>
-
-            <p>
-                📱 
-                <a 
-                    href="https://wa.me/6288299774940"
-                    target="_blank"
-                >
-                    +62 882-9977-4940
-                </a>
-            </p>
-
-        </div>
-
-        <!-- SKILLS -->
-        <h2 class="section-title lang id">
-            Keahlian Teknis
-        </h2>
-
-        <h2 class="section-title lang en active">
-            Technical Skills
-        </h2>
-
-        <ul class="lang id">
-
-            <li>2D Drawing Teknik</li>
-            <li>3D Modeling (Rhinoceros)</li>
-            <li>Cadkey & Dimension</li>
-            <li>3D Grading (Rhino CDL)</li>
-            <li>Midsole & Outsole Tooling</li>
-            <li>CAD Troubleshooting</li>
-
-        </ul>
-
-        <ul class="lang en active">
-
-            <li>2D Technical Drawing</li>
-            <li>3D Modeling (Rhinoceros)</li>
-            <li>Cadkey & Dimension</li>
-            <li>3D Grading (Rhino CDL)</li>
-            <li>Midsole & Outsole Tooling</li>
-            <li>CAD Troubleshooting</li>
-
-        </ul>
-
-        <!-- COMPETENCIES -->
-        <h2 class="section-title lang id">
-            Kompetensi
-        </h2>
-
-        <h2 class="section-title lang en active">
-            Competencies
-        </h2>
-
-        <ul class="lang id">
-
-            <li>Kepemimpinan</li>
-            <li>Problem Solving</li>
-            <li>Komunikasi</li>
-            <li>Kerja Sama Tim</li>
-
-        </ul>
-
-        <ul class="lang en active">
-
-            <li>Leadership</li>
-            <li>Problem Solving</li>
-            <li>Communication</li>
-            <li>Team Collaboration</li>
-
-        </ul>
-
-    </div>
-
-    <!-- RIGHT -->
-    <div class="right">
-
-        <!-- PROFILE -->
-        <div class="right-section">
-
-            <h2 class="lang id">
-                Profil Profesional
-            </h2>
-
-            <h2 class="lang en active">
-                Professional Profile
-            </h2>
-
-            <p class="profile lang id">
-
-                Profesional Tooling Engineer dengan pengalaman lebih dari
-                <span class="highlight">10 tahun</span>
-                di industri manufaktur alas kaki.
-                Berpengalaman dalam pengembangan tooling,
-                CAD 2D & 3D,
-                pengecekan mold,
-                troubleshooting produksi,
-                dan koordinasi dengan vendor.
-
-            </p>
-
-            <p class="profile lang en active">
-
-                Experienced Tooling Engineer with more than
-                <span class="highlight">10 years of expertise</span>
-                in footwear manufacturing industry.
-                Skilled in tooling development,
-                CAD 2D & 3D,
-                mold checking,
-                production troubleshooting,
-                and collaboration with vendors.
-
-            </p>
-
-        </div>
-
-        <!-- EXPERIENCE -->
-        <div class="right-section">
-
-            <h2 class="lang id">
-                Pengalaman Kerja
-            </h2>
-
-            <h2 class="lang en active">
-                Work Experience
-            </h2>
-
-            <div class="job">
-
-                <h3>Tooling Engineer</h3>
-                <span>PT Pratama Abadi Industri | 2016 - Present</span>
-
-                <ul class="lang id">
-
-                    <li>Mengelola desain dan persiapan tooling.</li>
-                    <li>Membuat model CAD 2D & 3D.</li>
-                    <li>Menyiapkan drawing dan dokumentasi tooling.</li>
-                    <li>Melakukan troubleshooting tooling produksi.</li>
-
-                </ul>
-
-                <ul class="lang en active">
-
-                    <li>Managed tooling design and preparation.</li>
-                    <li>Created 2D & 3D CAD models.</li>
-                    <li>Prepared technical drawings and tooling documentation.</li>
-                    <li>Performed tooling troubleshooting.</li>
-
-                </ul>
-
-            </div>
-
-            <div class="job">
-
-                <h3>Daily Mold Checker - PMIMS</h3>
-                <span>PT Pratama Abadi Industri | 2014 - 2016</span>
-
-                <ul class="lang id">
-
-                    <li>Melakukan inspeksi mold.</li>
-                    <li>Mengelola inventaris mold.</li>
-                    <li>Berkoordinasi dengan QA dan produksi.</li>
-
-                </ul>
-
-                <ul class="lang en active">
-
-                    <li>Conducted mold inspections.</li>
-                    <li>Managed mold inventory.</li>
-                    <li>Coordinated with QA and production teams.</li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-        <!-- EDUCATION -->
-        <div class="right-section">
-
-            <h2 class="lang id">
-                Pendidikan
-            </h2>
-
-            <h2 class="lang en active">
-                Education
-            </h2>
-
-            <p class="lang id">
-
-                <strong>Sarjana Manajemen</strong><br>
-                STIE PGRI Sukabumi
-
-            </p>
-
-            <p class="lang en active">
-
-                <strong>Bachelor Degree in Management</strong><br>
-                STIE PGRI Sukabumi
-
-            </p>
-
-        </div>
-
-        <!-- LANGUAGES -->
-        <div class="right-section">
-
-            <h2 class="lang id">
-                Bahasa
-            </h2>
-
-            <h2 class="lang en active">
-                Languages
-            </h2>
-
-            <ul class="lang id">
-
-                <li>Indonesia — Native</li>
-                <li>Inggris — Intermediate</li>
-
+    <!-- ===============================
+           NAVIGATION
+    =============================== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-logo">Yodi<span>.</span></div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn-primary btn-small">Hire Me</a></li>
             </ul>
 
-            <ul class="lang en active">
-
-                <li>Indonesian — Native</li>
-                <li>English — Intermediate</li>
-
-            </ul>
-
+            <div class="hamburger" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
+    </nav>
 
-    </div>
+    <!-- ===============================
+           HERO / TENTANG SAYA
+    =============================== -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-tagline">👋 Hello, I'm</p>
+                <h1>Yodi <span>Setiawan</span></h1>
+                <p style="font-size:20px;font-weight:500;color:#2563eb;margin-bottom:8px;">Tooling Engineer</p>
+                <p class="hero-description">
+                    Experienced Tooling Engineering professional with <strong>10+ years</strong> of experience in footwear manufacturing industry, specializing in CAD 2D/3D development, tooling engineering, gauge design, mold modification, and production support. Skilled in Rhinoceros, Cadkey, and tooling development processes for new model projects and production improvement.
+                </p>
 
-</div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">📩 Contact Me</a>
+                    <a href="Yodi_Setiawan_CV.pdf" download class="btn-secondary">📄 Download CV</a>
+                </div>
 
-<!-- =========================
-     POPUP - MODIFIED
-========================= -->
+                <div class="hero-social">
+                    <a href="https://linkedin.com/in/yodikick" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/yodikick" target="_blank" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://wa.me/6287729044022" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="mailto:mail@yodikick.my.id" aria-label="Email">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://instagram.com/yodikick" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
 
-<div id="photoPopup" class="photo-popup">
+            <div class="hero-image">
+                <img src="foto.webp" alt="Yodi Setiawan - Tooling Engineer" loading="lazy">
+            </div>
+        </div>
+    </section>
 
-    <div class="popup-container">
+    <!-- ===============================
+           EXPERIENCE / PENGALAMAN
+    =============================== -->
+    <section class="section" id="experience" style="background:white;">
+        <div class="container">
+            <div class="section-title-center">
+                <h2 class="section-title">Work Experience</h2>
+                <p class="section-subtitle">Over a decade of professional journey in footwear manufacturing</p>
+            </div>
 
-        <span class="close-popup" onclick="closePhotoPopup()">
-            ✕
-        </span>
+            <div class="experience-grid">
+                <!-- Job 1 - Tooling Engineer -->
+                <div class="experience-card">
+                    <div class="header">
+                        <div>
+                            <h3>Tooling Engineer - Bottom CAD 2D & 3D</h3>
+                            <span class="company">PT Pratama Abadi Industri</span>
+                        </div>
+                        <span class="period">2016 - Present</span>
+                    </div>
+                    <ul>
+                        <li>Develop and modify 2D & 3D tooling design for new model development and production support</li>
+                        <li>Create and optimize tooling systems including bottom tooling, gauge, and universal tooling</li>
+                        <li>Support production activities by troubleshooting tooling-related issues and implementing corrective actions</li>
+                        <li>Coordinate with production, development, and vendor teams to ensure tooling readiness and dimensional accuracy</li>
+                        <li>Perform mold verification and dimensional checking to maintain product quality standards</li>
+                        <li>Support continuous improvement activities for tooling efficiency and manufacturing performance</li>
+                        <li>Create technical feedback and suggestions for tooling and product development improvement</li>
+                    </ul>
+                    <div style="margin-top:16px;padding-top:16px;border-top:1px solid #e2e8f0;">
+                        <strong style="color:#2563eb;font-size:14px;">🏆 Achievements:</strong>
+                        <ul style="margin-top:8px;">
+                            <li>Improved tooling accuracy and reduced production rework through optimized CAD modification process</li>
+                            <li>Contributed to faster tooling preparation for new model development projects</li>
+                            <li>Supported production efficiency improvement through tooling optimization initiatives</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <img
-            src="foto.webp"
-            class="popup-image"
-            alt="Yodi Setiawan"
-        >
+                <!-- Job 2 - Daily Mold Checker -->
+                <div class="experience-card">
+                    <div class="header">
+                        <div>
+                            <h3>Daily Mold Checker</h3>
+                            <span class="company">PT Pratama Abadi Industri</span>
+                        </div>
+                        <span class="period">2014 - 2016</span>
+                    </div>
+                    <ul>
+                        <li>Conduct dimensional checking and mold inspection to ensure compliance with production specifications</li>
+                        <li>Monitor tooling condition and coordinate corrective action for tooling abnormalities</li>
+                        <li>Support production quality assurance related to mold and tooling systems</li>
+                    </ul>
+                </div>
 
-        <div class="popup-name">Yodi Setiawan</div>
-        <div class="popup-title">Tooling Engineer</div>
+                <!-- Job 3 - Production Operator -->
+                <div class="experience-card">
+                    <div class="header">
+                        <div>
+                            <h3>Production Operator</h3>
+                            <span class="company">PT Pratama Abadi Industri</span>
+                        </div>
+                        <span class="period">Earlier</span>
+                    </div>
+                    <ul>
+                        <li>Support footwear production process according to quality and safety standards</li>
+                        <li>Operate production equipment and maintain process consistency</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    </div>
+    <!-- ===============================
+           SKILLS / KEHLIAN
+    =============================== -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-title-center">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Core competencies and tools I work with daily</p>
+            </div>
 
-</div>
+            <!-- Software Skills -->
+            <div class="skill-category">
+                <h4>💻 Software</h4>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-cube"></i></div>
+                        <div class="name">Rhinoceros</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-pencil-ruler"></i></div>
+                        <div class="name">Cadkey</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-paint-brush"></i></div>
+                        <div class="name">Adobe Illustrator</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-file-pdf"></i></div>
+                        <div class="name">Adobe Acrobat</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-table"></i></div>
+                        <div class="name">Microsoft Excel</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-file-word"></i></div>
+                        <div class="name">Microsoft Word</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-file-powerpoint"></i></div>
+                        <div class="name">Microsoft PowerPoint</div>
+                    </div>
+                </div>
+            </div>
 
-<!-- =========================
-     SCRIPT
-========================= -->
+            <!-- Engineering Skills -->
+            <div class="skill-category">
+                <h4>🔧 Engineering Skills</h4>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-drafting-compass"></i></div>
+                        <div class="name">2D & 3D CAD Design</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-tools"></i></div>
+                        <div class="name">Tooling Development</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-ruler-combined"></i></div>
+                        <div class="name">Gauge Design</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-industry"></i></div>
+                        <div class="name">Mold Engineering</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-eye"></i></div>
+                        <div class="name">Technical Drawing Reading</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-arrows-alt-h"></i></div>
+                        <div class="name">Dimension Analysis</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-cogs"></i></div>
+                        <div class="name">Manufacturing Process Support</div>
+                    </div>
+                </div>
+            </div>
 
-<script>
+            <!-- Core Competencies -->
+            <div class="skill-category">
+                <h4>⭐ Core Competencies</h4>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-hard-hat"></i></div>
+                        <div class="name">Tooling Engineering</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-cubes"></i></div>
+                        <div class="name">CAD 2D & 3D Design</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-edit"></i></div>
+                        <div class="name">Mold Modification</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-gauge-high"></i></div>
+                        <div class="name">Gauge Development</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-shoe-prints"></i></div>
+                        <div class="name">Bottom CAD Engineering</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-headset"></i></div>
+                        <div class="name">Production Support</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-rocket"></i></div>
+                        <div class="name">New Model Development</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-bug"></i></div>
+                        <div class="name">Manufacturing Problem Solving</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-handshake"></i></div>
+                        <div class="name">Vendor Coordination</div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="icon"><i class="fas fa-users"></i></div>
+                        <div class="name">Team Coordination</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-/* =========================
-   DEFAULT LANGUAGE: ENGLISH
-========================= */
+    <!-- ===============================
+           PORTFOLIO
+    =============================== -->
+    <section class="section" id="portfolio" style="background:white;">
+        <div class="container">
+            <div class="section-title-center">
+                <h2 class="section-title">Portfolio</h2>
+                <p class="section-subtitle">Selected projects and work samples</p>
+            </div>
 
-// Set default language to English when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    setLanguage('en');
-});
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-card">
+                    <div class="image">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <div class="info">
+                        <h4>3D Shoe Mold Design</h4>
+                        <p>Complete 3D modeling and grading for sports shoe outsole using Rhinoceros and CDL.</p>
+                        <div class="tags">
+                            <span>Rhino</span>
+                            <span>CDL</span>
+                            <span>Tooling</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" target="_blank">View Project →</a>
+                        </div>
+                    </div>
+                </div>
 
-/* =========================
-   LANGUAGE SWITCHER
-========================= */
+                <!-- Project 2 -->
+                <div class="portfolio-card">
+                    <div class="image">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <div class="info">
+                        <h4>Technical Drawing Automation</h4>
+                        <p>Developed standardized drawing templates for faster tooling documentation.</p>
+                        <div class="tags">
+                            <span>CAD</span>
+                            <span>Automation</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" target="_blank">View Project →</a>
+                        </div>
+                    </div>
+                </div>
 
-function setLanguage(language){
+                <!-- Project 3 -->
+                <div class="portfolio-card">
+                    <div class="image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="info">
+                        <h4>Mold Inspection System</h4>
+                        <p>Created a systematic mold checking and inventory management process for PMIMS.</p>
+                        <div class="tags">
+                            <span>Quality Control</span>
+                            <span>Inventory</span>
+                        </div>
+                        <div class="links">
+                            <a href="#" target="_blank">View Project →</a>
+                        </div>
+                    </div>
+                </div>
 
-    document.querySelectorAll('.lang').forEach(el=>{
-        el.classList.remove('active');
-    });
+                <!-- Project 4 - GitHub -->
+                <div class="portfolio-card">
+                    <div class="image">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="info">
+                        <h4>GitHub Portfolio</h4>
+                        <p>Explore my code repositories and open-source contributions on GitHub.</p>
+                        <div class="tags">
+                            <span>Open Source</span>
+                            <span>Code</span>
+                        </div>
+                        <div class="links">
+                            <a href="https://github.com/yodikick" target="_blank">Visit GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    document.querySelectorAll('.' + language).forEach(el=>{
-        el.classList.add('active');
-    });
+    <!-- ===============================
+           CONTACT / KONTAK
+    =============================== -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-title-center">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's collaborate or discuss your next project</p>
+            </div>
 
-}
+            <div class="contact-wrapper">
+                <!-- Left: Contact Info -->
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p>Feel free to reach out for collaborations, project inquiries, or just a friendly chat.</p>
 
-/* =========================
-   PHOTO TO NAME ANIMATION
-========================= */
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div class="label">Location</div>
+                            <div class="value">Cianjur, West Java, Indonesia</div>
+                        </div>
+                    </div>
 
-setTimeout(()=>{
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="label">Email</div>
+                            <div class="value">
+                                <a href="mailto:mail@yodikick.my.id">mail@yodikick.my.id</a>
+                            </div>
+                        </div>
+                    </div>
 
-    document
-        .getElementById('profilePhoto')
-        .classList
-        .remove('active-photo');
+                    <div class="contact-item">
+                        <div class="icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <div class="label">Phone / WhatsApp</div>
+                            <div class="value">
+                                <a href="https://wa.me/6287729044022" target="_blank">+62 877-2904-4022</a>
+                            </div>
+                        </div>
+                    </div>
 
-    document
-        .getElementById('profileName')
-        .classList
-        .add('active-name');
+                    <div class="contact-item">
+                        <div class="icon"><i class="fab fa-linkedin-in"></i></div>
+                        <div>
+                            <div class="label">LinkedIn</div>
+                            <div class="value">
+                                <a href="https://linkedin.com/in/yodikick" target="_blank">linkedin.com/in/yodikick</a>
+                            </div>
+                        </div>
+                    </div>
 
-},3000);
+                    <div class="contact-item">
+                        <div class="icon"><i class="fab fa-github"></i></div>
+                        <div>
+                            <div class="label">GitHub</div>
+                            <div class="value">
+                                <a href="https://github.com/yodikick" target="_blank">github.com/yodikick</a>
+                            </div>
+                        </div>
+                    </div>
 
-/* =========================
-   PHOTO POPUP
-========================= */
+                    <div class="contact-item">
+                        <div class="icon"><i class="fab fa-instagram"></i></div>
+                        <div>
+                            <div class="label">Instagram</div>
+                            <div class="value">
+                                <a href="https://instagram.com/yodikick" target="_blank">@yodikick</a>
+                            </div>
+                        </div>
+                    </div>
 
-function openPhotoPopup(){
+                    <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+                        <a href="Yodi_Setiawan_CV.pdf" download class="btn-primary" style="flex:1;text-align:center;min-width:160px;">
+                            📄 Download CV
+                        </a>
+                        <a href="https://wa.me/6287729044022" target="_blank" class="btn-secondary" style="flex:1;text-align:center;min-width:160px;">
+                            💬 Chat Now
+                        </a>
+                    </div>
+                </div>
 
-    document
-        .getElementById('photoPopup')
-        .classList
-        .add('show');
+                <!-- Right: Sidebar -->
+                <div class="contact-sidebar">
+                    <div class="big-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3>Let's Work Together</h3>
+                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
 
-}
+                    <div class="availability">
+                        <span class="dot"></span>
+                        <div>
+                            <span>Available for freelance</span><br>
+                            <small>Response within 24 hours</small>
+                        </div>
+                    </div>
 
-function closePhotoPopup(){
+                    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+                        <a href="mailto:mail@yodikick.my.id" class="btn-primary" style="flex:1;text-align:center;">
+                            📧 Email Me
+                        </a>
+                        <a href="https://linkedin.com/in/yodikick" target="_blank" class="btn-secondary" style="flex:1;text-align:center;">
+                            🔗 LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    document
-        .getElementById('photoPopup')
-        .classList
-        .remove('show');
+    <!-- ===============================
+           FOOTER
+    =============================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="social">
+                <a href="https://linkedin.com/in/yodikick" target="_blank" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/yodikick" target="_blank" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://wa.me/6287729044022" target="_blank" aria-label="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="mailto:mail@yodikick.my.id" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://instagram.com/yodikick" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p>
+                &copy; 2026 Yodi Setiawan. Built with <span class="heart">❤</span> and lots of coffee.
+            </p>
+        </div>
+    </footer>
 
-}
+    <!-- ===============================
+           SCRIPT
+    =============================== -->
+    <script>
+        // ============================
+        // MOBILE MENU TOGGLE
+        // ============================
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('open');
+        }
 
-document
-.getElementById('photoPopup')
-.addEventListener('click',function(e){
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
 
-    // Close popup when clicking outside the container
-    if(e.target === this){
-        closePhotoPopup();
-    }
+        // ============================
+        // NAVBAR SCROLL EFFECT
+        // ============================
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                navbar.style.boxShadow = 'none';
+            }
+        });
 
-});
+        // ============================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ============================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-</script>
+        console.log('🚀 Yodi Setiawan - Portfolio loaded successfully!');
+    </script>
 
 </body>
 </html>
