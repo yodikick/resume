@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
 
@@ -91,6 +91,7 @@ body{
 
 .profile-wrapper{
     margin-bottom:30px;
+    position:relative;
 }
 
 .profile-photo{
@@ -255,13 +256,13 @@ body{
 }
 
 /* =========================
-   POPUP
+   POPUP - MODIFIED
 ========================= */
 
 .photo-popup{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,0.85);
+    background:rgba(0,0,0,0.7);
 
     display:flex;
     justify-content:center;
@@ -280,20 +281,55 @@ body{
     visibility:visible;
 }
 
-.popup-image{
-    width:350px;
-    max-width:90%;
-    border-radius:16px;
+/* Popup container yang menempel di bawah nama */
+.popup-container{
+    position:relative;
+    width:auto;
+    max-width:250px; /* Lebar disesuaikan dengan nama */
+    background:white;
+    border-radius:12px;
+    padding:20px 20px 15px 20px;
     box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    text-align:center;
+}
+
+.popup-image{
+    width:100%;
+    max-width:200px;
+    height:auto;
+    border-radius:12px;
+    display:block;
+    margin:0 auto;
+}
+
+.popup-name{
+    color:#17233b;
+    font-size:20px;
+    font-weight:700;
+    margin-top:12px;
+    margin-bottom:4px;
+}
+
+.popup-title{
+    color:#6b7280;
+    font-size:14px;
 }
 
 .close-popup{
     position:absolute;
-    top:25px;
-    right:35px;
-    color:white;
-    font-size:34px;
+    top:8px;
+    right:15px;
+    color:#6b7280;
+    font-size:28px;
     cursor:pointer;
+    font-weight:300;
+    transition:0.3s;
+    line-height:1;
+}
+
+.close-popup:hover{
+    color:#17233b;
+    transform:scale(1.1);
 }
 
 /* =========================
@@ -424,11 +460,11 @@ body{
         </div>
 
         <!-- TITLE -->
-        <h3 class="lang id active">
+        <h3 class="lang id">
             Tooling Engineer
         </h3>
 
-        <h3 class="lang en">
+        <h3 class="lang en active">
             Tooling Engineer
         </h3>
 
@@ -476,15 +512,15 @@ body{
         </div>
 
         <!-- SKILLS -->
-        <h2 class="section-title lang id active">
+        <h2 class="section-title lang id">
             Keahlian Teknis
         </h2>
 
-        <h2 class="section-title lang en">
+        <h2 class="section-title lang en active">
             Technical Skills
         </h2>
 
-        <ul class="lang id active">
+        <ul class="lang id">
 
             <li>2D Drawing Teknik</li>
             <li>3D Modeling (Rhinoceros)</li>
@@ -495,7 +531,7 @@ body{
 
         </ul>
 
-        <ul class="lang en">
+        <ul class="lang en active">
 
             <li>2D Technical Drawing</li>
             <li>3D Modeling (Rhinoceros)</li>
@@ -507,15 +543,15 @@ body{
         </ul>
 
         <!-- COMPETENCIES -->
-        <h2 class="section-title lang id active">
+        <h2 class="section-title lang id">
             Kompetensi
         </h2>
 
-        <h2 class="section-title lang en">
+        <h2 class="section-title lang en active">
             Competencies
         </h2>
 
-        <ul class="lang id active">
+        <ul class="lang id">
 
             <li>Kepemimpinan</li>
             <li>Problem Solving</li>
@@ -524,7 +560,7 @@ body{
 
         </ul>
 
-        <ul class="lang en">
+        <ul class="lang en active">
 
             <li>Leadership</li>
             <li>Problem Solving</li>
@@ -541,15 +577,15 @@ body{
         <!-- PROFILE -->
         <div class="right-section">
 
-            <h2 class="lang id active">
+            <h2 class="lang id">
                 Profil Profesional
             </h2>
 
-            <h2 class="lang en">
+            <h2 class="lang en active">
                 Professional Profile
             </h2>
 
-            <p class="profile lang id active">
+            <p class="profile lang id">
 
                 Profesional Tooling Engineer dengan pengalaman lebih dari
                 <span class="highlight">10 tahun</span>
@@ -562,7 +598,7 @@ body{
 
             </p>
 
-            <p class="profile lang en">
+            <p class="profile lang en active">
 
                 Experienced Tooling Engineer with more than
                 <span class="highlight">10 years of expertise</span>
@@ -580,11 +616,11 @@ body{
         <!-- EXPERIENCE -->
         <div class="right-section">
 
-            <h2 class="lang id active">
+            <h2 class="lang id">
                 Pengalaman Kerja
             </h2>
 
-            <h2 class="lang en">
+            <h2 class="lang en active">
                 Work Experience
             </h2>
 
@@ -593,7 +629,7 @@ body{
                 <h3>Tooling Engineer</h3>
                 <span>PT Pratama Abadi Industri | 2016 - Present</span>
 
-                <ul class="lang id active">
+                <ul class="lang id">
 
                     <li>Mengelola desain dan persiapan tooling.</li>
                     <li>Membuat model CAD 2D & 3D.</li>
@@ -602,7 +638,7 @@ body{
 
                 </ul>
 
-                <ul class="lang en">
+                <ul class="lang en active">
 
                     <li>Managed tooling design and preparation.</li>
                     <li>Created 2D & 3D CAD models.</li>
@@ -618,7 +654,7 @@ body{
                 <h3>Daily Mold Checker - PMIMS</h3>
                 <span>PT Pratama Abadi Industri | 2014 - 2016</span>
 
-                <ul class="lang id active">
+                <ul class="lang id">
 
                     <li>Melakukan inspeksi mold.</li>
                     <li>Mengelola inventaris mold.</li>
@@ -626,7 +662,7 @@ body{
 
                 </ul>
 
-                <ul class="lang en">
+                <ul class="lang en active">
 
                     <li>Conducted mold inspections.</li>
                     <li>Managed mold inventory.</li>
@@ -641,22 +677,22 @@ body{
         <!-- EDUCATION -->
         <div class="right-section">
 
-            <h2 class="lang id active">
+            <h2 class="lang id">
                 Pendidikan
             </h2>
 
-            <h2 class="lang en">
+            <h2 class="lang en active">
                 Education
             </h2>
 
-            <p class="lang id active">
+            <p class="lang id">
 
                 <strong>Sarjana Manajemen</strong><br>
                 STIE PGRI Sukabumi
 
             </p>
 
-            <p class="lang en">
+            <p class="lang en active">
 
                 <strong>Bachelor Degree in Management</strong><br>
                 STIE PGRI Sukabumi
@@ -668,22 +704,22 @@ body{
         <!-- LANGUAGES -->
         <div class="right-section">
 
-            <h2 class="lang id active">
+            <h2 class="lang id">
                 Bahasa
             </h2>
 
-            <h2 class="lang en">
+            <h2 class="lang en active">
                 Languages
             </h2>
 
-            <ul class="lang id active">
+            <ul class="lang id">
 
                 <li>Indonesia — Native</li>
                 <li>Inggris — Intermediate</li>
 
             </ul>
 
-            <ul class="lang en">
+            <ul class="lang en active">
 
                 <li>Indonesian — Native</li>
                 <li>English — Intermediate</li>
@@ -697,20 +733,27 @@ body{
 </div>
 
 <!-- =========================
-     POPUP
+     POPUP - MODIFIED
 ========================= -->
 
 <div id="photoPopup" class="photo-popup">
 
-    <span class="close-popup" onclick="closePhotoPopup()">
-        ✕
-    </span>
+    <div class="popup-container">
 
-    <img
-        src="foto.webp"
-        class="popup-image"
-        alt="Yodi Setiawan"
-    >
+        <span class="close-popup" onclick="closePhotoPopup()">
+            ✕
+        </span>
+
+        <img
+            src="foto.webp"
+            class="popup-image"
+            alt="Yodi Setiawan"
+        >
+
+        <div class="popup-name">Yodi Setiawan</div>
+        <div class="popup-title">Tooling Engineer</div>
+
+    </div>
 
 </div>
 
@@ -719,6 +762,15 @@ body{
 ========================= -->
 
 <script>
+
+/* =========================
+   DEFAULT LANGUAGE: ENGLISH
+========================= */
+
+// Set default language to English when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setLanguage('en');
+});
 
 /* =========================
    LANGUAGE SWITCHER
@@ -780,7 +832,8 @@ document
 .getElementById('photoPopup')
 .addEventListener('click',function(e){
 
-    if(e.target.id === 'photoPopup'){
+    // Close popup when clicking outside the container
+    if(e.target === this){
         closePhotoPopup();
     }
 
