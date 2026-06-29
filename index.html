@@ -86,6 +86,7 @@
           --card-shadow-hover: 0 15px 35px rgba(0,0,0,0.08);
           --nav-bg: rgba(255, 255, 255, 0.85);
           --hero-gradient: linear-gradient(105deg, #ffffff 0%, #f0f4ff 100%);
+          --hero-left-edge: #f0f4ff;
           --hero-right-bg: #0f172a;
           --footer-bg: #0f172a;
           --footer-text: #cbd5e1;
@@ -113,6 +114,7 @@
           --card-shadow-hover: 0 15px 35px rgba(0,0,0,0.3);
           --nav-bg: rgba(15, 23, 42, 0.9);
           --hero-gradient: linear-gradient(105deg, #0f172a 0%, #1a2332 100%);
+          --hero-left-edge: #1a2332;
           --hero-right-bg: #060a14;
           --footer-bg: #0a0f1a;
           --footer-text: #94a3b8;
@@ -479,6 +481,17 @@
             transform: scale(1.03);
         }
 
+        /* Foto mengikuti suasana dark mode: sedikit diredupkan dan
+           dikontraskan agar menyatu dengan background gelap,
+           bukan tetap terang sendiri di tengah halaman gelap */
+        body.dark-mode .hero-right .photo-wrapper img {
+            filter: brightness(0.75) contrast(1.05) saturate(0.9);
+        }
+
+        body.dark-mode .hero-right .photo-wrapper img:hover {
+            filter: brightness(0.85) contrast(1.05) saturate(0.95);
+        }
+
         .hero-right .photo-overlay {
             position: absolute;
             top: 0;
@@ -489,11 +502,37 @@
             pointer-events: none;
             background: linear-gradient(135deg, 
                 transparent 55%, 
-                rgba(240, 244, 255, 0.3) 70%,
-                rgba(240, 244, 255, 0.6) 85%,
-                rgba(240, 244, 255, 0.9) 100%
+                color-mix(in srgb, var(--fade-overlay) 30%, transparent) 70%,
+                color-mix(in srgb, var(--fade-overlay) 60%, transparent) 85%,
+                color-mix(in srgb, var(--fade-overlay) 90%, transparent) 100%
             );
             clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
+        }
+
+        /* Gradien gelap dari sisi kiri foto, hanya aktif saat dark mode.
+           Default transparent/tidak berefek di light mode supaya
+           tampilan light mode tidak berubah. */
+        .hero-right .left-shade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 3;
+            pointer-events: none;
+            background: transparent;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        body.dark-mode .hero-right .left-shade {
+            background: linear-gradient(to right,
+                var(--hero-left-edge) 0%,
+                color-mix(in srgb, var(--hero-left-edge) 70%, transparent) 18%,
+                color-mix(in srgb, var(--hero-left-edge) 30%, transparent) 38%,
+                transparent 60%
+            );
+            opacity: 1;
         }
 
         .hero-right .diagonal-edge {
@@ -1249,6 +1288,10 @@
 
                 <!-- Diagonal overlay - foto tertutup garis miring -->
                 <div class="photo-overlay"></div>
+
+                <!-- Gradien gelap dari kiri (hanya aktif di dark mode),
+                     supaya transisi dari hero-left ke foto lebih menyatu -->
+                <div class="left-shade"></div>
 
                 <!-- Diagonal edge effect -->
                 <div class="diagonal-edge"></div>
